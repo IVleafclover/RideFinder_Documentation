@@ -1,0 +1,324 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[german]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{listings} %java code
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+%\usepackage[table,xcdraw]{xcolor}
+\usepackage{multirow}
+\usepackage{colortbl}
+
+
+\lstdefinestyle{JavaStyle}
+{
+frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  numbers=left, %für zeilennummern
+  numberstyle=\tiny,
+  numberblanklines=false,
+  stepnumber=1,
+  numbersep=10pt,
+  basicstyle={\small\ttfamily},
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\lstdefinestyle{XmlStyle}
+{
+numbers=left, %für zeilennummern
+  numberstyle=\tiny,
+  numberblanklines=false,
+  stepnumber=1,
+  numbersep=10pt,
+  numberstyle=\tiny\color{gray},
+basicstyle=\ttfamily,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape,
+morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  stringstyle=\color{black},
+  identifierstyle=\color{darkblue},
+  keywordstyle=\color{cyan},
+  tabsize=3,
+  morekeywords={xmlns,version,type}% list your attributes here
+}
+
+\usepackage{fancybox} %fÃƒÂ¼r kommandozeilenboxen
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{multirow}
+
+\usepackage[ansinew]{inputenc} %Umlaute
+\parindent0pt %keine automatische EinrÃƒÂ¼ckung nach Leerzeile
+
+%footer
+\usepackage{fancyhdr}
+
+%Abkürzungen
+\usepackage[printonlyused]{acronym}
+
+%Tabelle
+\usepackage{tabularx}
+
+%Bilder nebeneinander
+\usepackage{subfigure} 
+
+%Deutsches Literaturverzeichnis
+\usepackage{bibgerm}
+
+%Abstand zwischen Absätzen
+\setlength{\parskip}{0.5em}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[C]{Hochschule für Technik, Wirtschaft und Kultur Leipzig  -- Weckel}
+\fancyfoot[C]{Masterprojekt}
+\fancyfoot[R] \thepage
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\author{Christian Weckel}
+\title{Entwicklung einer webfähigen, indexbasierten Suche, am Beispiel von Mitfahrgelegenheiten}
+\begin{document}
+\pagenumbering{gobble}
+\maketitle
+\thispagestyle{empty}
+
+\pagebreak
+
+\pagenumbering{arabic}
+\tableofcontents
+
+\pagebreak
+
+\section{Einleitung}
+
+Ziel dieses Projekts ist das Erstellen eines Vergleichsportals für Mitfahrgelegenheiten.\\
+Dieses soll als Webapplikation realisiert werden. Dazu müssen verschiedene Mitfahrgelegenheitsportal ausgelesen werden. Deren Ergebnisse werden dann zwischengespeichert, um anschließend über eine eigene Weboberfläche abgerufen werden zu können. Diese Oberfläche soll über einen Browser erreichbar sein und dort sollen sich Start, Ziel, sowie Datum der zu suchenden Mitfahrgelegenheiten angezeigt werden. Bestätigt ein Nutzer seine Eingabe, so werden ihn alle passenden Mitfahrgelegenheiten mit näheren Informationen angezeigt.
+
+\section{Vorstellung des Programms}
+
+Abbildung \ref{frontend_empty} zeigt die Weboberfläche des Programms, direkt nach ihrem Aufruf. Somit wurden noch keine Sucheingaben getätigt.\\
+
+\begin{figure}[H]								
+		\centering
+		\includegraphics[width=\textwidth]{bilder/frontend_empty.png}		
+		\caption{Weboberfläche direkt nach dem Laden}
+		\label{frontend_empty}		
+	\end{figure}
+
+Im oberen Bereich der Oberfläche befinden sich die Komponenten, welche der Eingabe von Suchkriterien nutzen. Umrahmt werden diese von einem Hintergrundbild und dem Logo der Anwendung.\\
+Erstes Eingabefeld trägt den Bezeichner 'Von'. Es handelt sich dabei um die Eingabe des Startorts. Besonderheit dieses Felds ist die Autovervollständigung. Fängt der Nutzer an einen Ort einzugeben, so werden unter dem Feld Orte vorgeschlagen, welche mit seiner aktuellen Eingabe beginnen. Diese kann er durch einen Klick oder mit Enter auswählen. Diese Funktionalität ist in Abbildung \ref{frontend_search} dargestellt.\\
+Ähnlich der Startort-Eingabe, ist das Feld mit dem Bezeichner 'Nach'. Dieses ist für die Eingabe des Endorts zuständig.
+
+\begin{figure}[H]								
+		\centering
+		\includegraphics[width=\textwidth / 2]{bilder/frontend_search.png}		
+		\caption{Suchvorschläge}
+		\label{frontend_search}		
+\end{figure}
+	
+Zwischen den beiden Ortseingabe-Feldern befindet sich noch ein Knopf. Dieser ist für den Tausch von Start- und Endposition vorgesehen. Nützlich ist dies, da oft nach der Suche einer Fahrt, auch eine Rückfahrt gesucht wird.\\
+Im letzten Eingabefeld wird das Datum der zu suchenden Mitfahrgelegenheit eingegeben. Dabei kann das Datum entweder direkt eingegeben oder über einen Kalender ausgewählt werden. Bei der direkten Eingabe muss ein gültiges internationales Format eingehalten werden, sonst wird die Eingabe nicht erkannt und das Feld rot hervorgehoben.\\
+Der Kalender lässt sich durch einen Klick auf das zugehörige Symbol öffnen. Dort kann ein einzelner Tag mit einem Doppelklick auf diesen ausgewählt werden. Abbildung \ref{frontend_calendar} zeigt diesen Kalender.
+
+\begin{figure}[H]								
+		\centering
+		\includegraphics[width=\textwidth / 2]{bilder/frontend_calendar.png}		
+		\caption{Kalender für Datumsauswahl}
+		\label{frontend_calendar}		
+\end{figure}
+
+Der Knopf ganz rechts, wird dafür genutzt, die Eingaben abzuschicken und anschließend die Suchergebnisse anzuzeigen.
+Diese werden in einer Liste dargestellt, wie sie Abbildung \ref{frontend_results} zeigt. Werden keine Ergebnisse gefunden, so zeigt dies eine entsprechende Nachricht an.
+
+\begin{figure}[H]								
+		\centering
+		\includegraphics[width=\textwidth]{bilder/frontend_results.png}		
+		\caption{Suchergebnisse}
+		\label{frontend_results}		
+\end{figure}
+
+Ein Suchergebnis besteht immer aus folgenden Komponenten.\\
+Erstere ist das Logo des Mitfahrgelegenheitsportals, von dem die Information stammt.\\
+Zweite ist die Uhrzeit, wann die Mitfahrgelegenheit losfährt.\\
+Die dritte Information ist die Anzahl der freien Plätze. Ist kein Platz verfügbar, so wird die Mitfahrgelegenheit gar nicht erst in den Ergebnissen angezeigt.\\
+Die Information ganz rechts ist der Preis, welchen eine Person für das mitfahren bezahlen muss.\\
+Zu guter Letzt gibt es auch noch einen Link zu der Originalseite der Mitfahrgelegenheit. Dieser wird durch einen Klick auf den Suchergebniseintrag betätigt und dient dazu, den Fahrer zu kontaktieren.
+
+\section{Umsetzung}
+
+Das Programm besteht aus drei eigenständigen Komponenten. Diese Komponenten werden in der Abbildung \ref{components} als blaue Objekte dargestellt.\\
+Zwei der Komponenten sind ein eigens geschriebenes Backend und ein Frontend. Die dritte Komponente ist die Suchengine Elasticsearch. Der Quelltext der beiden selbstgeschriebenen Komponenten, ist im Github vorhanden. Die Links dafür werden in den jeweiligen Kapiteln genannt. Im Github befindet sich auch eine Anleitung, wie das Programm auf einem Ubuntu-System  über das Terminal eingerichtet werden kann.\footnote{$https://github.com/IVleafclover/RideFinder_Documentation/blob/master/\\Installationsanleitung\%20Ubuntu.txt$}
+
+\begin{figure}[H]								
+		\centering
+		\includegraphics[width=\textwidth]{bilder/components.png}		
+		\caption{Komponenten}
+		\label{components}		
+\end{figure}
+
+\subsection{Elasticsearch}
+
+Bei Elasticsearch handelt es sich um eine Suchengine. Elasticsearch ist ein open source-Projekt und kann somit frei in anderen Softwarelösungen verwendet werden.\\
+Die Suchengine wird als ein eigener Service auf dem System ausgeführt. Dabei bietet Elasticsearch eine Schnittstelle an, über die andere Services mit ihr kommunizieren können. In der Regel ist dies der Port 9200. Ausnahme dafür ist eine Java-Schnittstelle. Für Java wird eine eigene Java API von Elasticsearch angeboten. Diese ermöglicht es Komponenten von Elasticsearch direkt im Java-Quelltext zu verwenden. Dadurch wird die Nutzung von Elasticsearch mit einer Java-Software stark erleichtert. In Bezug auf Java wird empfohlen den Port 9300 zu verwenden.\\
+Der Vorteil bei der Verwendung von Elasticsearch ist, dass die Daten in einem Index verwaltet werden. Dieser ist speziell für Suchanfragen ausgelegt und beschleunigt den Suchvorgang um ein Vielfaches, im Vergleich zu herkömmlichen Datenspeichersystemen, wie Datenbanken. Die Komplexität die Daten zu pflegen nimmt dabei jedoch nicht zu.
+
+\subsection{Backend}
+
+Bei dem Backend handelt es sich um ein in Java geschriebenes Programm, welches keine Oberfläche besitzt. Es wird einmal gestartet und bleibt dann im Hintergrund aktiv. Möglich ist dies, da die einzelnen Vorgänge nach einem Zeitplan ausgeführt werden und das gesamte Programm niemals terminiert. Der Quelltext des Backends liegt vollständig im Github vor.\footnote{$https://github.com/IVleafclover/RideFinder_Backend$}\\
+Eine Aufgabe des Backends ist es die verschiedenen Mitfahrgelegenheitsportale auszulesen. Da einige der Portale mit Ajax und JavaScript generiert werden, werden auch deren Inhalte nicht sofort beim Aufruf angezeigt. Des Weiteren kann Java alleine auch keine JavaScript ausführen. Somit würde das Auslesen einiger dieser Portale keine Mitfahrgelegenheiten zurückgeben.\\
+Aus diesem Grund verwendet das Backend einen kopflosen Browser. Dabei handelt es sich um einen eigenständigen Browser, welcher keine Oberfläche besitzt. Dieser ermöglicht es JavaScript-Funktionen auszuführen. Ein solcher Browser lässt sich in Java durch das Framework HtmlUnit verwenden. Die Implementierung ist dabei sehr einfach und kann bei Interesse im Quelltext nachgeschaut werden.\\
+Ist durch den Browser ein Mitfahrgelegenheitsportal aufgerufen, so wird dessen Suchformular ausgefüllt und abgeschickt. Als Resultat wird die Ergebnisseite an den Browser übermittelt. Je nachdem welches Portal gerade ausgelesen wird, muss eventuell noch auf die Ausführung von JavaScript-Funktionen gewartet werden.\\
+Anschließend kann die Suchergebnisseite ausgelesen werden. Dies geschieht über die Verwendung von XPath-Befehlen. Solche Befehle erlauben es die Struktur der Webseite auszulesen und Elemente mit gewissen Eigenschaften zu erhalten. So können z.B. alle Links mit einer bestimmten Klasse ausgegeben werden. Das Listing \ref{xpath} zeigt wie die Attribute von 'BesserMitfahren' ausgelesen werden.
+
+\begin{lstlisting}[caption={Auslesen der Eienschaften über XPath}, style=JavaStyle, label={xpath}]
+	final List<DomNode> times = (List<DomNode>) resultPage
+			.getByXPath("//a/*[contains(concat(' ', @class, ' '), ' time ')]");
+	final List<DomNode> prices = (List<DomNode>) resultPage
+			.getByXPath("//a/*[contains(concat(' ', @class, ' '), ' price ')]");
+	final List<DomNode> seats = (List<DomNode>) resultPage
+			.getByXPath("//a/*[contains(concat(' ', @class, ' '), ' people ')]");
+	final List<DomNode> dates = (List<DomNode>) resultPage
+			.getByXPath("//a/*[contains(concat(' ', @class, ' '), ' date ')]");
+	final List<DomNode> links = (List<DomNode>) resultPage
+			.getByXPath("//li[contains(concat(' ', @class, ' '), ' clear ')]/a");
+
+	final List<DomNode> pages = (List<DomNode>) resultPage.getByXPath(".//*[@id='pager']/a");
+\end{lstlisting}
+
+Nachdem die Suchergebnisse ausgelesen wurden, werden diese in Java-Klassen zwischengespeichert. Anschließend wird eine Verbindung zu Elasticsearch aufgebaut und die gefundenen Mitfahrgelegenheiten in ein JSON-Format konvertiert. Dadurch können sie direkt in den Elasticsearch-Index geschrieben werden. Dies funktioniert wie in Listing \ref{write} dargestellt wird.
+
+\begin{lstlisting}[caption={Schreiben einer Mitfahrgelegenheit in den Index}, style=JavaStyle, label={write}]
+	public static void write(final Ride ride, final Client client) {
+		final Map<String, Object> json = new HashMap<String, Object>();
+		json.put("from", ride.getFrom());
+		json.put("to", ride.getTo());
+		json.put("date", ride.getDate());
+		json.put("time", ride.getTime());
+		if (ride.getPrice() == null) {
+			json.put("price", "null");
+		} else {
+			json.put("price", Float.toString(ride.getPrice()));
+		}
+		json.put("seat", Integer.toString(ride.getSeat()));
+		json.put("provider", ride.getProvider());
+		json.put("link", ride.getLink());
+
+		@SuppressWarnings("unused")
+		final IndexResponse response = client.prepareIndex("rides", "ride", ride.getId()).setSource(json).get();
+	}
+\end{lstlisting}
+
+Eine weitere Aufgabe ist es alte Einträge aus dem Index zu entfernen. Dazu werden einmal alle 24 Stunden alle Mitfahrgelegenheiten des gestrigen Tages gesucht und anschließend sofort gelöscht. Dies soll dazu beitragen, dass der Index nicht ins Unendliche wächst.
+
+\subsection{Frontend}
+
+Das Frontend des Programms ist auch in Java geschrieben. Es handelt sich um eine Java-Webapplikation, welche in einem geeigneten Server, wie Tomcat, ausgeführt werden kann. Der Quelltext des Frontend ist ebenfalls im Github vorzufinden.\footnote{$https://github.com/IVleafclover/RideFinder$}\\
+Auch wenn das Frontend in Java geschrieben ist, handelt es sich bei der Weboberfläche um eine Webseite, welche durch JavaScript erzeugt wird. Zuständig dafür ist ein Framework namens 'Vaadin'. Dieses ermöglicht in Java einzelne Komponenten zusammenzufügen. Bei Ausführung des Programms generiert Vaadin aus den Java-Komponenten JavaScript-Komponenten und damit eine Webseite. Das Aussehen der Webseite kann dabei noch mit eigenen Stylesheets ähnlich CSS angepasst werden. Ein Beispiel, wie Oberflächen mit Vaadin erstellt werden, zeigt Listing \ref{vaadin}. Dabei handelt es sich um das Initialisieren des Sucheingabe-Formulars.
+
+\begin{lstlisting}[caption={Initialisieren des Suchformulars}, style=JavaStyle, label={vaadin}]
+	private void initSearchInput(final VerticalLayout layoutHeader) {
+		final HorizontalLayout layoutsearchInput = new HorizontalLayout();
+
+		comboboxFrom = new ComboBox("Von", new ArrayList<String>(Arrays.asList(destinations)));
+		comboboxFrom.addStyleName("searchComponent");
+		layoutsearchInput.addComponent(comboboxFrom);
+
+		final Button buttonChangeFromAndTo = new Button("< >");
+		buttonChangeFromAndTo.addClickListener(new Button.ClickListener() {
+			@Override
+			public void buttonClick(final ClickEvent event) {
+				changeFromAndTo();
+			}
+		});
+		buttonChangeFromAndTo.addStyleName("searchComponent");
+		layoutsearchInput.addComponent(buttonChangeFromAndTo);
+		layoutsearchInput.setComponentAlignment(buttonChangeFromAndTo, Alignment.BOTTOM_LEFT);
+
+		comboboxTo = new ComboBox("Nach", new ArrayList<String>(Arrays.asList(destinations)));
+		comboboxTo.addStyleName("searchComponent");
+		layoutsearchInput.addComponent(comboboxTo);
+
+		datefieldDate = new DateField("Datum", new Date());
+		datefieldDate.addStyleName("searchComponent");
+		layoutsearchInput.addComponent(datefieldDate);
+
+		final Button buttonSearch = new Button("Suchen");
+		buttonSearch.addClickListener(new Button.ClickListener() {
+			@Override
+			public void buttonClick(final ClickEvent event) {
+				if (validateInputs()) {
+					removeSearchResults();
+					addSearchResults();
+				}
+			}
+		});
+		buttonSearch.addStyleName("searchComponent");
+		layoutsearchInput.addComponent(buttonSearch);
+		layoutsearchInput.setComponentAlignment(buttonSearch, Alignment.BOTTOM_LEFT);
+		layoutHeader.addComponent(layoutsearchInput);
+		layoutHeader.setComponentAlignment(layoutsearchInput, Alignment.TOP_LEFT);
+	}
+\end{lstlisting}
+
+Auch das Frontend besitzt eine Verbindung zu Elasticsearch. Diese benötigt es, um die Suchergebnisse zu laden. Dazu muss eine Query an die Suchengine gesendet werden. Um mehrere Suchkriterien zu kombinieren, werden BoolQueries benötigt. Dabei lässt sich einstellen, ob ein Kriterium erfüllt werden muss oder soll. Dies entspricht einer Und- bzw. Oder-Verknüpfung. Wurde so eine Query erzeugt, lässt sie sich direkt an Elasticsearch weitersenden. Als Ergebnis wird ein SearchResponse zurückgegeben, der alle Ergebnisse enthält. Listing \ref{search} zeigt wie so eine Query erstellt und ausgeführt wird.
+
+\begin{lstlisting}[caption={Ausführen einer Suche}, style=JavaStyle, label={search}]
+	final BoolQueryBuilder searchQuery = QueryBuilders.boolQuery()
+				.must(QueryBuilders.termQuery("from", from.toLowerCase()))
+				.must(QueryBuilders.termQuery("to", to.toLowerCase())).must(QueryBuilders.termQuery("date", date));
+
+		SearchResponse searchResponse = client.prepareSearch("rides").setScroll(new TimeValue(60000))
+				.setQuery(searchQuery).execute().actionGet();
+\end{lstlisting}
+
+\section{Fazit}
+
+Die Erstellung eines Vergleichsportals im Rahmen dieses Projekts, stieß auf ein paar wenige Schwierigkeiten. Eine davon war das Auslesen der Mitfahrgelegenheitsportale, welche ihre Daten mit JavaScript nachladen. Dieses Problem lässt sich aber sehr gut umgehen, wenn ein kopfloser Browser verwendet wird.\\
+Die Umsetzung des Frontends mit Hilfe von Vaadin funktionierte ohne weitere Probleme. Das Framework Vaadin ist schnell zu erlernen und zu benutzen. Es ist für jegliche Webanwendungen mit Java geeignet.\\
+Am Anfang des Projekts bestand die Idee die Mitfahrgelegenheiten immer live von den Portalen zu laden. Die Wahl Elasticsearch als Zwischenspeicher für die Daten zu verwenden und die Mitfahrgelegenheiten nicht live zu laden, schien erst falsch zu sein.\\
+Es hat den Nachteil, dass die Daten nicht immer aktuell sind. Des Weiteren entsteht auch ein großer Datentraffic bezüglich der Mitfahrgelegenheitsportale. Aus diesem Grund wurde auch ein Timer eingebaut, welcher dafür sorgt, dass die Portale nur jede Minute ausgelesen werden und das Programm nicht auf einer Blacklist landet.\\
+Der Vorteil der Verwendung von Elasticsearch ist der, dass die Nutzer extrem schnell die Suchergebnisse angezeigt bekommen. Dies ist sehr wichtig, da der kopflose Browser einiges an Zeit brauchen kann, bis alle JavaScript-Funktionen und somit die Suchergebnisse geladen werden. Vor allem bei Portalen, wo die Ergebnisse auf mehreren Seiten vorliegen, würde diese Wartezeit für viele Nutzer zu groß sein.\\
+Deshalb ist die Verwendung von Elasticsearch doch die bessere Lösung.
+
+\pagebreak
+
+\pagenumbering{Roman}
+
+% Literaturliste soll im Abbildungsverzeichnis auftauchen
+\newpage
+\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+
+\listoffigures
+
+\newpage
+\addcontentsline{toc}{section}{Listings}
+
+\lstlistoflistings
+
+\end{document}
