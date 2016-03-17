@@ -95,14 +95,15 @@ morestring=[b]",
 \pagestyle{fancy}
 \fancyhead{}
 \fancyfoot{}
-\fancyhead[C]{Hochschule für Technik, Wirtschaft und Kultur Leipzig  -- Weckel}
-\fancyfoot[C]{Masterprojekt}
+\fancyhead[C]{Hochschule für Technik, Wirtschaft und Kultur Leipzig  -- Christian Weckel}
+\fancyfoot[C]{Entwicklung einer webfähigen, indexbasierten Suche, am Beispiel von Mitfahrgelegenheiten}
 \fancyfoot[R] \thepage
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
 \author{Christian Weckel}
-\title{Entwicklung einer webfähigen, indexbasierten Suche, am Beispiel von Mitfahrgelegenheiten}
+\title{Masterprojekt\\
+Entwicklung einer webfähigen, indexbasierten Suche, am Beispiel von Mitfahrgelegenheiten}
 \begin{document}
 \pagenumbering{gobble}
 \maketitle
@@ -131,7 +132,7 @@ Abbildung \ref{frontend_empty} zeigt die Weboberfläche des Programms, direkt nac
 		\label{frontend_empty}		
 	\end{figure}
 
-Im oberen Bereich der Oberfläche befinden sich die Komponenten, welche der Eingabe von Suchkriterien nutzen. Umrahmt werden diese von einem Hintergrundbild und dem Logo der Anwendung.\\
+Im oberen Bereich der Oberfläche befinden sich die Komponenten, welche der Eingabe von Suchkriterien dienen. Umrahmt werden diese von einem Hintergrundbild und dem Logo der Anwendung.\\
 Erstes Eingabefeld trägt den Bezeichner 'Von'. Es handelt sich dabei um die Eingabe des Startorts. Besonderheit dieses Felds ist die Autovervollständigung. Fängt der Nutzer an einen Ort einzugeben, so werden unter dem Feld Orte vorgeschlagen, welche mit seiner aktuellen Eingabe beginnen. Diese kann er durch einen Klick oder mit Enter auswählen. Diese Funktionalität ist in Abbildung \ref{frontend_search} dargestellt.\\
 Ähnlich der Startort-Eingabe, ist das Feld mit dem Bezeichner 'Nach'. Dieses ist für die Eingabe des Endorts zuständig.
 
@@ -167,7 +168,7 @@ Ein Suchergebnis besteht immer aus folgenden Komponenten.\\
 Erstere ist das Logo des Mitfahrgelegenheitsportals, von dem die Information stammt.\\
 Zweite ist die Uhrzeit, wann die Mitfahrgelegenheit losfährt.\\
 Die dritte Information ist die Anzahl der freien Plätze. Ist kein Platz verfügbar, so wird die Mitfahrgelegenheit gar nicht erst in den Ergebnissen angezeigt.\\
-Die Information ganz rechts ist der Preis, welchen eine Person für das mitfahren bezahlen muss.\\
+Die Information ganz rechts ist der Preis, welchen eine Person für das Mitfahren bezahlen muss.\\
 Zu guter Letzt gibt es auch noch einen Link zu der Originalseite der Mitfahrgelegenheit. Dieser wird durch einen Klick auf den Suchergebniseintrag betätigt und dient dazu, den Fahrer zu kontaktieren.
 
 \section{Umsetzung}
@@ -191,12 +192,12 @@ Der Vorteil bei der Verwendung von Elasticsearch ist, dass die Daten in einem In
 \subsection{Backend}
 
 Bei dem Backend handelt es sich um ein in Java geschriebenes Programm, welches keine Oberfläche besitzt. Es wird einmal gestartet und bleibt dann im Hintergrund aktiv. Möglich ist dies, da die einzelnen Vorgänge nach einem Zeitplan ausgeführt werden und das gesamte Programm niemals terminiert. Der Quelltext des Backends liegt vollständig im Github vor.\footnote{$https://github.com/IVleafclover/RideFinder_Backend$}\\
-Eine Aufgabe des Backends ist es die verschiedenen Mitfahrgelegenheitsportale auszulesen. Da einige der Portale mit Ajax und JavaScript generiert werden, werden auch deren Inhalte nicht sofort beim Aufruf angezeigt. Des Weiteren kann Java alleine auch keine JavaScript ausführen. Somit würde das Auslesen einiger dieser Portale keine Mitfahrgelegenheiten zurückgeben.\\
+Eine Aufgabe des Backends ist es die verschiedenen Mitfahrgelegenheitsportale auszulesen. Da einige der Portale mit Ajax und JavaScript generiert werden, werden auch deren Inhalte nicht sofort beim Aufruf angezeigt. Des Weiteren kann Java alleine auch kein JavaScript ausführen. Somit würde das Auslesen einiger dieser Portale keine Mitfahrgelegenheiten zurückgeben.\\
 Aus diesem Grund verwendet das Backend einen kopflosen Browser. Dabei handelt es sich um einen eigenständigen Browser, welcher keine Oberfläche besitzt. Dieser ermöglicht es JavaScript-Funktionen auszuführen. Ein solcher Browser lässt sich in Java durch das Framework HtmlUnit verwenden. Die Implementierung ist dabei sehr einfach und kann bei Interesse im Quelltext nachgeschaut werden.\\
 Ist durch den Browser ein Mitfahrgelegenheitsportal aufgerufen, so wird dessen Suchformular ausgefüllt und abgeschickt. Als Resultat wird die Ergebnisseite an den Browser übermittelt. Je nachdem welches Portal gerade ausgelesen wird, muss eventuell noch auf die Ausführung von JavaScript-Funktionen gewartet werden.\\
 Anschließend kann die Suchergebnisseite ausgelesen werden. Dies geschieht über die Verwendung von XPath-Befehlen. Solche Befehle erlauben es die Struktur der Webseite auszulesen und Elemente mit gewissen Eigenschaften zu erhalten. So können z.B. alle Links mit einer bestimmten Klasse ausgegeben werden. Das Listing \ref{xpath} zeigt wie die Attribute von 'BesserMitfahren' ausgelesen werden.
 
-\begin{lstlisting}[caption={Auslesen der Eienschaften über XPath}, style=JavaStyle, label={xpath}]
+\begin{lstlisting}[caption={Auslesen der Eigenschaften über XPath}, style=JavaStyle, label={xpath}]
 	final List<DomNode> times = (List<DomNode>) resultPage
 			.getByXPath("//a/*[contains(concat(' ', @class, ' '), ' time ')]");
 	final List<DomNode> prices = (List<DomNode>) resultPage
@@ -238,13 +239,12 @@ Eine weitere Aufgabe ist es alte Einträge aus dem Index zu entfernen. Dazu werde
 
 \subsection{Frontend}
 
-Das Frontend des Programms ist auch in Java geschrieben. Es handelt sich um eine Java-Webapplikation, welche in einem geeigneten Server, wie Tomcat, ausgeführt werden kann. Der Quelltext des Frontend ist ebenfalls im Github vorzufinden.\footnote{$https://github.com/IVleafclover/RideFinder$}\\
+Das Frontend des Programms ist auch in Java geschrieben. Es handelt sich um eine Java-Webapplikation, welche in einem geeigneten Server, wie Tomcat, ausgeführt werden kann. Der Quelltext des Frontends ist ebenfalls im Github vorzufinden.\footnote{$https://github.com/IVleafclover/RideFinder$}\\
 Auch wenn das Frontend in Java geschrieben ist, handelt es sich bei der Weboberfläche um eine Webseite, welche durch JavaScript erzeugt wird. Zuständig dafür ist ein Framework namens 'Vaadin'. Dieses ermöglicht in Java einzelne Komponenten zusammenzufügen. Bei Ausführung des Programms generiert Vaadin aus den Java-Komponenten JavaScript-Komponenten und damit eine Webseite. Das Aussehen der Webseite kann dabei noch mit eigenen Stylesheets ähnlich CSS angepasst werden. Ein Beispiel, wie Oberflächen mit Vaadin erstellt werden, zeigt Listing \ref{vaadin}. Dabei handelt es sich um das Initialisieren des Sucheingabe-Formulars.
 
 \begin{lstlisting}[caption={Initialisieren des Suchformulars}, style=JavaStyle, label={vaadin}]
 	private void initSearchInput(final VerticalLayout layoutHeader) {
 		final HorizontalLayout layoutsearchInput = new HorizontalLayout();
-
 		comboboxFrom = new ComboBox("Von", new ArrayList<String>(Arrays.asList(destinations)));
 		comboboxFrom.addStyleName("searchComponent");
 		layoutsearchInput.addComponent(comboboxFrom);
