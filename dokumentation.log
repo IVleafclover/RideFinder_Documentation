@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.3.11)  16 MAR 2016 19:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.3.11)  20 MAR 2016 11:19
 entering extended mode
 **./dokumentation.tex
 (dokumentation.tex
@@ -418,18 +418,18 @@ Package: bibgerm 2000/08/18 v0.1 Support for mixed language bibliographies
 (dokumentation.aux)
 \openout1 = `dokumentation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
 \AtBeginShipoutBox=\box36
 
 ("C:\Users\Christian\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pd
@@ -466,13 +466,13 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 
 bibgerm.sty: babel.sty detected
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 109.
+LaTeX Font Info:    Try loading font information for U+msa on input line 112.
 
 ("C:\Users\Christian\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsa.
 fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 109.
+LaTeX Font Info:    Try loading font information for U+msb on input line 112.
 
 ("C:\Users\Christian\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsb.
 fd"
@@ -485,7 +485,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout5 = `dokumentation.toc'.
 
  [1]
-Underfull \hbox (badness 10000) in paragraph at lines 126--127
+Underfull \hbox (badness 10000) in paragraph at lines 129--130
 
  []
 
@@ -493,35 +493,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 126--127
 File: bilder/frontend_empty.png Graphic file (type png)
 
 <use bilder/frontend_empty.png>
-Package pdftex.def Info: bilder/frontend_empty.png used on input line 130.
+Package pdftex.def Info: bilder/frontend_empty.png used on input line 133.
 (pdftex.def)             Requested size: 345.0pt x 120.48755pt.
 
 <bilder/frontend_search.png, id=15, 147.55125pt x 159.59625pt>
 File: bilder/frontend_search.png Graphic file (type png)
 
 <use bilder/frontend_search.png>
-Package pdftex.def Info: bilder/frontend_search.png used on input line 141.
+Package pdftex.def Info: bilder/frontend_search.png used on input line 144.
 (pdftex.def)             Requested size: 172.5pt x 186.58559pt.
  [2 <./bilder/frontend_empty.png>]
 <bilder/frontend_calendar.png, id=20, 194.97844pt x 241.65282pt>
 File: bilder/frontend_calendar.png Graphic file (type png)
 
 <use bilder/frontend_calendar.png>
-Package pdftex.def Info: bilder/frontend_calendar.png used on input line 152.
+Package pdftex.def Info: bilder/frontend_calendar.png used on input line 155.
 (pdftex.def)             Requested size: 172.5pt x 213.80188pt.
  [3 <./bilder/frontend_search.png>]
 <bilder/frontend_results.png, id=25, 585.68813pt x 624.08156pt>
 File: bilder/frontend_results.png Graphic file (type png)
 
 <use bilder/frontend_results.png>
-Package pdftex.def Info: bilder/frontend_results.png used on input line 162.
+Package pdftex.def Info: bilder/frontend_results.png used on input line 165.
 (pdftex.def)             Requested size: 345.0pt x 367.63356pt.
  [4 <./bilder/frontend_calendar.png>] [5 <./bilder/frontend_results.png>]
 <bilder/components.png, id=34, 485.815pt x 303.1325pt>
 File: bilder/components.png Graphic file (type png)
 
 <use bilder/components.png>
-Package pdftex.def Info: bilder/components.png used on input line 181.
+Package pdftex.def Info: bilder/components.png used on input line 184.
 (pdftex.def)             Requested size: 345.0pt x 215.26721pt.
  [6 <./bilder/components.png>]
 ("C:\Users\Christian\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\lstla
@@ -560,7 +560,7 @@ r6.pfb><C:/Users/Christian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public
 /amsfonts/cm/cmr7.pfb><C:/Users/Christian/AppData/Local/Programs/MiKTeX 2.9/fon
 ts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Christian/AppData/Local/Programs
 /MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on dokumentation.pdf (13 pages, 1080175 bytes).
+Output written on dokumentation.pdf (13 pages, 1060597 bytes).
 PDF statistics:
  104 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
